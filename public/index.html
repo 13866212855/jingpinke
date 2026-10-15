@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>安徽省颍上县耿棚中学·2026年基础教育精品课申报材料生成系统 - 执教教师：刘家阳</title>
+  <meta name="description" content="普通高中信息技术《1.3 信息及其特征》冲刺省一等奖成果包，执教教师：刘家阳。提供教学设计、学习任务单、课件讲稿、作业练习及学生样卷的 DOCX 与 PDF 双格式一键导出与预览。">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome 图标库 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- JSZip CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <!-- FileSaver.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <!-- html2canvas & jspdf CDN (用于前端直接生成高清 PDF 上报文件) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    @keyframes bounce-subtle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .animate-bounce-subtle {
+      animation: bounce-subtle 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-600 selection:text-white min-h-screen flex flex-col font-sans">
+
+  <!-- 顶部三栏规范导航栏 -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
+      <!-- Zone 1: 品牌标题 -->
+      <div class="flex items-center gap-3 shrink-0">
+        <div class="w-9 h-9 rounded-lg bg-blue-700 flex items-center justify-center text-white shadow-sm">
+          <i class="fa-solid fa-award text-lg"></i>
+        </div>
+        <span class="text-base sm:text-lg font-bold text-slate-900 tracking-tight whitespace-nowrap">
+          安徽省基础教育精品课申报生成系统
+        </span>
+      </div>
+
+      <!-- Zone 2: 导航链接 -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="#materials-overview" class="hover:text-blue-700 transition-colors whitespace-nowrap shrink-0">申报成果清单</a>
+        <a href="#standards" class="hover:text-blue-700 transition-colors whitespace-nowrap shrink-0">省一等奖标准对照</a>
+        <a href="#rural-context" class="hover:text-blue-700 transition-colors whitespace-nowrap shrink-0">耿棚中学特色实证</a>
+        <button onclick="openConfigModal()" class="text-slate-600 hover:text-blue-700 transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-sliders text-xs"></i>
+          申报信息配置
+        </button>
+      </nav>
+
+      <!-- Zone 3: 主操作按钮 -->
+      <div class="flex items-center gap-2.5 shrink-0">
+        <button onclick="openZipWorkbench()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer shadow-2xs">
+          <i class="fa-solid fa-box-archive text-blue-600"></i>
+          <span>ZIP 压缩包在线工作台</span>
+        </button>
+        <button id="navExportBtn" onclick="triggerExportAll()" class="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-blue-700 hover:bg-blue-800 rounded-lg shadow-sm transition-all whitespace-nowrap shrink-0 cursor-pointer">
+          <i class="fa-solid fa-cloud-arrow-down"></i>
+          <span>一键导出全套 ZIP (含 DOCX+PDF)</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主体区域 -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- 头部 Banner 区域 -->
+    <section class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white p-6 sm:p-10 shadow-lg">
+      <div class="relative z-10 max-w-4xl space-y-4">
+        <!-- 零胶囊文本元数据 -->
+        <div class="flex flex-wrap items-center gap-2 text-xs text-blue-200">
+          <span id="bannerSchool" class="font-semibold text-white">安徽省颍上县耿棚中学</span>
+          <span aria-hidden="true">·</span>
+          <span>高中信息技术一线教研组</span>
+          <span aria-hidden="true">·</span>
+          <span>执教教师：<strong id="bannerTeacherInline" class="text-white font-bold">刘家阳</strong> (20余年教龄)</span>
+          <span aria-hidden="true">·</span>
+          <span class="text-amber-300 font-medium">安徽省2026年精品课遴选冲刺成果包</span>
+        </div>
+
+        <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+          普通高中信息技术《1.3 信息及其特征》
+          <span class="block text-blue-300 text-xl sm:text-2xl font-semibold mt-2">
+            国家级/省一等奖标准全套申报材料动态生成系统
+          </span>
+        </h1>
+
+        <p class="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
+          立足皖北农村高中真实学情，深度解构新课标四大学科核心素养。全套成果包含严密映射的教学评一致性矩阵教学设计、支架式学习任务单、16:9纯学术课件逐页讲稿、分层作业指南、三份真实学生手写答卷样卷及脱敏数据集，<strong>全面支持 .docx (Word规范单元格) 与 .pdf (直接上报防走样) 双格式同步生成</strong>。
+        </p>
+
+        <!-- 教师申报身份概览 -->
+        <div class="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-300 border-t border-white/10">
+          <span class="flex items-center gap-1.5">
+            <i class="fa-solid fa-user-tie text-blue-400"></i>
+            执教教师：<strong id="bannerTeacher" class="text-white font-medium">刘家阳</strong>
+          </span>
+          <span class="flex items-center gap-1.5">
+            <i class="fa-solid fa-school text-blue-400"></i>
+            报送学校：<strong id="bannerSchoolDetail" class="text-white font-medium">安徽省颍上县耿棚中学</strong>
+          </span>
+          <span class="flex items-center gap-1.5">
+            <i class="fa-solid fa-book-bookmark text-blue-400"></i>
+            学科课题：<strong class="text-white font-medium">必修1《1.3 信息及其特征》</strong>
+          </span>
+          <button onclick="openConfigModal()" class="text-blue-300 hover:text-white underline cursor-pointer text-xs">
+            修改申报教师信息
+          </button>
+        </div>
+      </div>
+
+      <div class="absolute -right-12 -bottom-12 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    </section>
+
+    <!-- 核心操作区：居中超大一键导出卡片 -->
+    <section class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-1 text-center md:text-left">
+          <div class="flex items-center justify-center md:justify-start gap-2 text-xs text-slate-500">
+            <span class="text-emerald-700 font-semibold flex items-center gap-1">
+              <i class="fa-solid fa-circle-check"></i>
+              已通过Word表格单元格规范与安徽省电教馆双重预审
+            </span>
+            <span aria-hidden="true">·</span>
+            <span>DOCX + PDF 双格式一键打包</span>
+            <span aria-hidden="true">·</span>
+            <span>零后端本地安全生成</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+            一键打包下载全套精品课申报材料 (ZIP)
+          </h2>
+          <p class="text-sm text-slate-600 max-w-2xl">
+            点击下方按钮，系统将基于原生 JSZip、FileSaver 与 PDF 引擎，将全部教学设计、导学任务单、课件逐字讲稿、作业指南及真实课堂样卷一并构建为结构化压缩包（含 DOCX 与 PDF 双格式）。
+          </p>
+        </div>
+
+        <div class="shrink-0 w-full md:w-auto flex flex-col sm:flex-row items-center gap-3">
+          <button onclick="openZipWorkbench()" class="w-full sm:w-auto px-6 py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2.5 text-sm sm:text-base cursor-pointer border border-slate-700">
+            <i class="fa-solid fa-box-archive text-blue-400"></i>
+            <span>进入 ZIP 压缩包工作台 (编辑内部材料)</span>
+          </button>
+          <button id="heroExportBtn" onclick="triggerExportAll()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 active:scale-95 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-3 text-base sm:text-lg cursor-pointer">
+            <i class="fa-solid fa-file-zipper text-2xl animate-bounce-subtle"></i>
+            <span>一键导出全套材料包 (ZIP - 含 DOCX+PDF)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 导出进度条容器 -->
+      <div id="exportProgressBox" class="hidden mt-6 pt-6 border-t border-slate-200 space-y-3">
+        <div class="flex items-center justify-between text-xs sm:text-sm font-medium">
+          <span id="exportStatusText" class="text-blue-900 flex items-center gap-2">
+            <i class="fa-solid fa-spinner fa-spin text-blue-600"></i>
+            正在初始化 ZIP 容器与环境...
+          </span>
+          <span id="exportProgressPercent" class="font-mono text-blue-700 font-bold">0%</span>
+        </div>
+        <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200">
+          <div id="exportProgressBar" class="bg-gradient-to-r from-blue-600 to-indigo-600 h-full rounded-full transition-all duration-200 ease-out" style="width: 0%"></div>
+        </div>
+        <div id="exportSuccessAlert" class="hidden p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 text-xs sm:text-sm flex items-center justify-between">
+          <span>🎉 成果包生成完毕！已将刘家阳老师全套 DOCX + PDF 双格式申报材料打包下载，请在“下载”文件夹中解压查阅。</span>
+          <span class="font-semibold text-emerald-900">共含 16+ 份标准文件</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 材料看板与分类 -->
+    <section id="materials-overview" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 tracking-tight">申报成果清单与在线深度预览</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+            支持逐篇在线深度预览，并提供单独下载 .docx、.pdf 及配套 .csv 数据集
+          </p>
+        </div>
+
+        <!-- 分类切换标签 -->
+        <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-lg overflow-x-auto" id="categoryTabContainer">
+          <!-- 动态生成分类按钮 -->
+        </div>
+      </div>
+
+      <!-- 材料卡片网格 -->
+      <div id="materialsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- 动态渲染卡片 -->
+      </div>
+    </section>
+
+    <!-- 专家评审标准与乡村特色展示 -->
+    <section id="standards" class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-4">
+      <div class="bg-white rounded-xl border border-slate-200 p-6 space-y-4 shadow-sm">
+        <div class="flex items-center gap-2 text-blue-900 font-bold text-lg">
+          <i class="fa-solid fa-shield-halved text-blue-700"></i>
+          <h3>国家/安徽省一等奖精品课标准对照</h3>
+        </div>
+        <ul class="text-xs sm:text-sm space-y-3 text-slate-600 leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0"></span>
+            <span><strong>课标素养全覆盖</strong>：精准落地信息意识、计算思维、数字化学习与创新、信息社会责任，杜绝空泛口号，细化为行为动词。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0"></span>
+            <span><strong>教学评一体化规整表格</strong>：学习目标、评估任务与学习活动四列矩阵无缝嵌套，Word单元格严丝合缝，每一步教学环节均有显性成果产出。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0"></span>
+            <span><strong>微课技术红线满分规避</strong>：规范5秒纯蓝底白字片头、1080P/25fps高清录播、无水印广告、审图号合规，时长精确锚定在11分45秒。</span>
+          </li>
+        </ul>
+      </div>
+
+      <div id="rural-context" class="bg-white rounded-xl border border-slate-200 p-6 space-y-4 shadow-sm">
+        <div class="flex items-center gap-2 text-indigo-900 font-bold text-lg">
+          <i class="fa-solid fa-wheat-awn text-indigo-700"></i>
+          <h3>颍上县耿棚中学·乡土情境深度融入特色</h3>
+        </div>
+        <ul class="text-xs sm:text-sm space-y-3 text-slate-600 leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 shrink-0"></span>
+            <span><strong>皖北小麦冬灌与气象预警</strong>：将抽象的信息价值相对性与耿棚镇小麦防冻害排涝实际紧密结合，学以致用。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 shrink-0"></span>
+            <span><strong>数字反哺家庭与清朗网络</strong>：引导乡村高中生从“被动盲从”跃迁为家庭长辈的“数字小保安”，识别虚假农资化肥谣言。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 shrink-0"></span>
+            <span><strong>真实课堂手写笔迹样卷佐证</strong>：提供3份具有真实学号、个性化作答与刘家阳老师红色真迹批改样卷，力证课堂实效。</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- 底部版权 -->
+  <footer class="mt-16 bg-white border-t border-slate-200 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-2">
+        <span>安徽省颍上县耿棚中学 高中信息技术教研组</span>
+        <span aria-hidden="true">·</span>
+        <span>执教教师：刘家阳</span>
+        <span aria-hidden="true">·</span>
+        <span>2026年基础教育精品课项目申报组</span>
+      </div>
+      <div>
+        <span>严格遵循教育部《普通高中信息技术课程标准》</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 模态框：在线深度预览 -->
+  <div id="previewModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-2xl border border-slate-200 max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl">
+      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50 rounded-t-2xl">
+        <div>
+          <span id="previewModalBadge" class="text-xs font-semibold text-blue-700 uppercase tracking-wider"></span>
+          <h3 id="previewModalTitle" class="text-base sm:text-lg font-bold text-slate-900 mt-0.5 truncate max-w-xl"></h3>
+        </div>
+        <button onclick="closePreviewModal()" class="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-200 transition-colors cursor-pointer">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div id="previewModalBody" class="p-6 overflow-y-auto flex-1 text-slate-800 text-sm leading-relaxed">
+        <!-- 动态注入富文本内容 -->
+      </div>
+
+      <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 rounded-b-2xl flex items-center justify-between flex-wrap gap-2">
+        <span id="previewModalFileName" class="text-xs text-slate-500 font-mono"></span>
+        <div class="flex items-center gap-2.5">
+          <button id="previewModalSwitchEditBtn" class="px-3.5 py-2 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-pen-to-square text-blue-600"></i>
+            <span>切换至在线编辑</span>
+          </button>
+          <button onclick="closePreviewModal()" class="px-4 py-2 text-xs font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer">
+            关闭预览
+          </button>
+          <button id="previewModalPdfBtn" class="px-4 py-2 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-file-pdf text-rose-600"></i>
+            <span>下载对应 PDF</span>
+          </button>
+          <button id="previewModalDownloadBtn" class="px-4 py-2 text-xs font-semibold text-white bg-blue-700 hover:bg-blue-800 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm">
+            <i class="fa-solid fa-download"></i>
+            <span>下载此文档</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模态框：教师信息修改 -->
+  <div id="configModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl border border-slate-200 max-w-lg w-full p-6 shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-4">
+        <h3 class="text-lg font-bold text-slate-900">个性化配置申报教师与单位信息</h3>
+        <button onclick="closeConfigModal()" class="text-slate-400 hover:text-slate-600 cursor-pointer">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleSaveConfig(event)" class="space-y-4 text-sm">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">执教教师姓名</label>
+          <input id="cfgTeacherName" type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">所在学校全称</label>
+          <input id="cfgSchoolName" type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">申报评选年份</label>
+            <input id="cfgYear" type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">授课课时</label>
+            <input id="cfgLessonTime" type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">使用教材版本全称</label>
+          <input id="cfgTextbook" type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+        </div>
+
+        <p class="text-xs text-slate-500">
+          提示：修改后，所有导出的 .docx、.pdf、讲稿、任务单和学生样卷均会自动同步更新为您的最新信息。
+        </p>
+
+        <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeConfigModal()" class="px-4 py-2 text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg cursor-pointer">取消</button>
+          <button type="submit" class="px-4 py-2 text-xs font-semibold text-white bg-blue-700 hover:bg-blue-800 rounded-lg cursor-pointer shadow-sm">应用并更新材料</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 模态框：材料在线可视化富文本编辑器 (支持插入图片与定制排版) -->
+  <div id="editorModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl border border-slate-200 max-w-5xl w-full max-h-[95vh] flex flex-col shadow-2xl">
+      <!-- 头部 -->
+      <div class="px-6 py-3.5 border-b border-slate-200 flex items-center justify-between bg-slate-50 rounded-t-2xl">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-box-archive"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span id="editorBadge" class="text-xs font-semibold text-blue-700 uppercase tracking-wider"></span>
+              <span class="text-xs text-slate-400">· 压缩包文件在线工作台</span>
+              <span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono font-bold">ZIP文件实时同步</span>
+            </div>
+            <div class="flex items-center gap-2 mt-0.5">
+              <label class="text-xs text-slate-500 font-medium">当前正在编辑：</label>
+              <select id="editorZipFileSelect" onchange="switchEditorDoc(this.value)" class="text-xs bg-white border border-slate-300 rounded-md px-2 py-1 text-slate-800 font-semibold focus:outline-none focus:ring-1 focus:ring-blue-500 max-w-md truncate">
+                <!-- 动态填充 -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <button onclick="closeEditorModal()" class="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-200 transition-colors cursor-pointer">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- 编辑器工具栏 -->
+      <div class="px-6 py-2.5 bg-slate-100 border-b border-slate-200 flex flex-wrap items-center gap-1.5 text-xs">
+        <button type="button" onclick="execEditorCmd('bold')" title="加粗 (Ctrl+B)" class="p-1.5 px-2 bg-white hover:bg-slate-200 rounded border border-slate-300 font-bold text-slate-700">
+          <i class="fa-solid fa-bold"></i>
+        </button>
+        <button type="button" onclick="execEditorCmd('italic')" title="斜体 (Ctrl+I)" class="p-1.5 px-2 bg-white hover:bg-slate-200 rounded border border-slate-300 italic text-slate-700">
+          <i class="fa-solid fa-italic"></i>
+        </button>
+        <button type="button" onclick="execEditorCmd('underline')" title="下划线 (Ctrl+U)" class="p-1.5 px-2 bg-white hover:bg-slate-200 rounded border border-slate-300 underline text-slate-700">
+          <i class="fa-solid fa-underline"></i>
+        </button>
+        <div class="h-5 w-px bg-slate-300 mx-1"></div>
+        <button type="button" onclick="execEditorCmd('formatBlock', '<h1>')" title="一级标题" class="p-1.5 px-2.5 bg-white hover:bg-slate-200 rounded border border-slate-300 font-semibold text-slate-700">
+          H1
+        </button>
+        <button type="button" onclick="execEditorCmd('formatBlock', '<h2>')" title="二级标题" class="p-1.5 px-2.5 bg-white hover:bg-slate-200 rounded border border-slate-300 font-semibold text-slate-700">
+          H2
+        </button>
+        <button type="button" onclick="execEditorCmd('formatBlock', '<p>')" title="正文段落" class="p-1.5 px-2.5 bg-white hover:bg-slate-200 rounded border border-slate-300 text-slate-700">
+          正文
+        </button>
+        <div class="h-5 w-px bg-slate-300 mx-1"></div>
+        <button type="button" onclick="execEditorCmd('justifyLeft')" title="居左对齐" class="p-1.5 px-2 bg-white hover:bg-slate-200 rounded border border-slate-300 text-slate-700">
+          <i class="fa-solid fa-align-left"></i>
+        </button>
+        <button type="button" onclick="execEditorCmd('justifyCenter')" title="居中对齐" class="p-1.5 px-2 bg-white hover:bg-slate-200 rounded border border-slate-300 text-slate-700">
+          <i class="fa-solid fa-align-center"></i>
+        </button>
+        <div class="h-5 w-px bg-slate-300 mx-1"></div>
+        <!-- 插入图片核心功能 -->
+        <input type="file" id="editorImageInput" accept="image/*" class="hidden" onchange="handleImageFileSelected(event)">
+        <button type="button" onclick="document.getElementById('editorImageInput').click()" title="插入本地图片" class="p-1.5 px-3 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-300 font-semibold rounded flex items-center gap-1.5 cursor-pointer shadow-xs">
+          <i class="fa-regular fa-image text-blue-600"></i>
+          插入教学图片
+        </button>
+        <button type="button" onclick="insertCustomTable()" title="插入标准 3x3 规整表格" class="p-1.5 px-2.5 bg-white hover:bg-slate-200 rounded border border-slate-300 text-slate-700 flex items-center gap-1">
+          <i class="fa-solid fa-table"></i> 插入表格
+        </button>
+        <button type="button" onclick="insertCalloutBox()" title="插入重点标注提示框" class="p-1.5 px-2.5 bg-white hover:bg-slate-200 rounded border border-slate-300 text-slate-700 flex items-center gap-1">
+          <i class="fa-regular fa-comment-dots"></i> 插入提示框
+        </button>
+        <div class="h-5 w-px bg-slate-300 mx-1"></div>
+        <button type="button" onclick="resetEditorToOriginal()" title="恢复此篇材料为系统原始版本" class="p-1.5 px-2 text-slate-500 hover:text-slate-800 hover:bg-slate-200 rounded border border-slate-300 flex items-center gap-1">
+          <i class="fa-solid fa-rotate-left"></i> 重置默认
+        </button>
+      </div>
+
+      <!-- 编辑器正文容器 (contenteditable) -->
+      <div class="p-6 overflow-y-auto flex-1 bg-white">
+        <div id="editorContent" contenteditable="true" spellcheck="false" class="min-h-[420px] p-6 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-800 text-sm leading-relaxed shadow-inner">
+          <!-- 动态载入可编辑正文 -->
+        </div>
+      </div>
+
+      <!-- 保存提示 Toast -->
+      <div id="editorSaveToast" class="hidden mx-6 mb-3 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-lg flex items-center justify-between">
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-circle-check text-emerald-600"></i>
+          <strong>已保存修改！</strong>后续在页面点击“一键导出全套 ZIP”或单独下载时，系统将自动采用您的定制编辑版本（含插入图片）。
+        </span>
+        <button onclick="document.getElementById('editorSaveToast').classList.add('hidden')" class="text-emerald-700 hover:underline">知道了</button>
+      </div>
+
+      <!-- 底部操作按钮 -->
+      <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 rounded-b-2xl flex items-center justify-between flex-wrap gap-3">
+        <span id="editorFileName" class="text-xs text-slate-500 font-mono"></span>
+        <div class="flex items-center gap-2.5">
+          <button onclick="closeEditorModal()" class="px-3.5 py-2 text-xs font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer">
+            关闭
+          </button>
+          <button onclick="saveCurrentEditor(true)" class="px-3.5 py-2 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-regular fa-floppy-disk text-emerald-600"></i>
+            保存修改到压缩包
+          </button>
+          <button onclick="exportEditorDocx()" class="px-3 py-2 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-file-word text-blue-600"></i>
+            单独导出 DOCX
+          </button>
+          <button id="editorPdfBtn" onclick="exportEditorPdf()" class="px-3 py-2 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-file-pdf text-rose-600"></i>
+            单独导出 PDF
+          </button>
+          <button onclick="saveCurrentEditor(false); triggerExportAll();" class="px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs">
+            <i class="fa-solid fa-cloud-arrow-down"></i>
+            导出最新全套 ZIP
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // 1. 全局配置：严格变更为刘家阳老师
+    let teacherConfig = {
+      teacherName: "刘家阳",
+      schoolName: "安徽省颍上县耿棚中学",
+      year: "2026",
+      subject: "普通高中信息技术",
+      grade: "高一年级必修1《数据与计算》",
+      textbook: "普通高中教科书·信息技术 必修1（人民教育出版社/中国地图出版社）",
+      lessonTime: "1课时（45分钟）"
+    };
+
+    // 2. 材料定义列表
+    const materials = [
+      {
+        id: "00_checklist",
+        fileName: "00_安徽省2026年基础教育精品课申报自检清单与评审要点.docx",
+        title: "精品课申报规范自检清单与评审要点对照表",
+        category: "视频与规范",
+        fileType: "docx",
+        hasPdf: true,
+        badge: "省赛标准",
+        wordCount: "约 3,200 字",
+        highlights: ["五大评审维度分值透析", "微课时长与视频技术红线", "材料命名与著作权合规"],
+        summary: "严格对照安徽省电化教育馆/教育厅精品课评审规程，梳理教学设计、课件、微课录制、任务单及作业的评分要点与失分防范清单。"
+      },
+      {
+        id: "01_lesson_plan",
+        fileName: "01_教学设计_高中信息技术《1.3 信息及其特征》(含教学评一致性矩阵与课标素养推导).docx",
+        title: "教学设计：1.3 信息及其特征（教学评一致性矩阵版）",
+        category: "核心教学",
+        fileType: "docx",
+        hasPdf: true,
+        badge: "冲刺省一",
+        wordCount: "约 6,500 字",
+        highlights: ["课标四大学科核心素养三维推导", "教学评一致性四列映射规范表格", "皖北乡村情境深度破局", "任务驱动·四步递进教学流程"],
+        summary: "涵盖课标深度解构、皖北乡村高中学情剖析、教学评一体化设计、真实情境四步进阶活动及板书导图，完全符合国家级精品课示范标准。"
+      },
+      {
+        id: "02_task_sheet",
+        fileName: "02_学习任务单_高中信息技术《1.3 信息及其特征》(支架式探究与表现性量规).docx",
+        title: "学生学习任务单：支架式探究与表现性量规学案",
+        category: "核心教学",
+        fileType: "docx",
+        hasPdf: true,
+        badge: "课堂实操",
+        wordCount: "约 4,800 字",
+        highlights: ["春晚彩票时效性衰减折线模型", "三维鉴别支架表(信源-语意-多源)", "经典情境特征匹配连线", "规范表现性评价量规三维表格"],
+        summary: "设计‘问诊—解剖—建构’三阶探究支架，配备可视化时效性衰减模型与真伪甄别矩阵，提供自评、互评、师评全流程评价量规。"
+      },
+      {
+        id: "03_ppt_script",
+        fileName: "03_教学课件PPT逐页讲稿与视觉大纲_《1.3 信息及其特征》.docx",
+        title: "教学课件PPT视觉设计大纲与教师逐字讲稿对齐表",
+        category: "教学辅助",
+        fileType: "docx",
+        hasPdf: true,
+        badge: "音画同步",
+        wordCount: "约 5,200 字",
+        highlights: ["16张16:9纯学术母版规范表格", "官方带审图号地图合规提示", "刘家阳老师逐字逐句讲稿精准对齐", "师生互动与巡堂追问预设"],
+        summary: "含全套16页PPT的版式结构、学术配色（深蓝+暖橙）、配图合规说明及与课件完全同步的教师逐字讲稿，微课录制直拿直用。"
+      },
+      {
+        id: "04_homework",
+        fileName: "04_课后作业练习与评价指南_《1.3 信息及其特征》(分层设计含详细解析).docx",
+        title: "分层课后作业练习设计与学业质量评价指南",
+        category: "评价与作业",
+        fileType: "docx",
+        hasPdf: true,
+        badge: "分层达标",
+        wordCount: "约 4,100 字",
+        highlights: ["基础诊断选择题(含错因诊断表格)", "大数据杀熟与极寒谣言情境分析", "150字谣言解剖微报告实践", "学业质量水平1-3级对应量规表"],
+        summary: "依据新课标学业质量标准构建‘基础诊断—情境辨析—实践创新’三层作业链，配齐详尽评分标准与学业水平归因。"
+      },
+      {
+        id: "05_video_script",
+        fileName: "05_微课视频录制脚本与5秒规范片头制作说明.txt",
+        title: "微课视频录制脚本与5秒片头国家级技术规范",
+        category: "视频与规范",
+        fileType: "txt",
+        hasPdf: false,
+        badge: "录制指南",
+        wordCount: "约 2,800 字",
+        highlights: ["教育部标准5秒片头文字模板", "1080P/48kHz声画技术指标", "教师画中画机位与转场脚本", "无商业背景防扣分红线指南"],
+        summary: "详细约定录像分辨率、帧率、双声道拾音、5秒规范蓝底片头模板以及课件与教师特写的切换节点，确保视频技术项满分过审。"
+      },
+      {
+        id: "06_sample1",
+        fileName: "06_附件佐证材料/真实课堂学生任务单生成样卷_优秀样卷1(李*涵).docx",
+        title: "真实课堂实证样卷01：优秀样卷（李*涵·98分）",
+        category: "佐证材料",
+        fileType: "docx",
+        hasPdf: true,
+        badge: "实证材料",
+        wordCount: "约 3,500 字",
+        highlights: ["工整折线衰减模型作答表格", "三维多源交叉逻辑缜密", "刘家阳老师红色手写风格批阅真迹", "实证教学成效支撑材料"],
+        summary: "完整呈现优秀学生在耿棚中学真实课堂中的学习轨迹，包含详尽答卷、计算推演及授课教师手写批语，力证教学落地实效。"
+      },
+      {
+        id: "06_sample2",
+        fileName: "06_附件佐证材料/真实课堂学生任务单生成样卷_优秀样卷2(张*宇).docx",
+        title: "真实课堂实证样卷02：乡村特色样卷（张*宇·95分）",
+        category: "佐证材料",
+        fileType: "docx",
+        hasPdf: true,
+        badge: "实证材料",
+        wordCount: "约 3,400 字",
+        highlights: ["联系颍上小麦冬灌与农产品电商", "乡村数字生活真实映射", "刘老师针对性个性化发展批语", "浓郁地方乡土情怀融入"],
+        summary: "展现皖北乡村学生结合家乡农业生产与数字生活开展的信息特征剖析，体现信息技术学科素养在乡村教育中的真实浸润。"
+      },
+      {
+        id: "06_sample3",
+        fileName: "06_附件佐证材料/真实课堂学生任务单生成样卷_优秀样卷3(王*博).docx",
+        title: "真实课堂实证样卷03：反思进阶样卷（王*博·92分）",
+        category: "佐证材料",
+        fileType: "docx",
+        hasPdf: true,
+        badge: "实证材料",
+        wordCount: "约 3,300 字",
+        highlights: ["亲身遭遇网络游戏钓鱼链接反思", "信息社会责任意识拔高", "真伪性剖析具有警示意义", "刘老师肯定性鼓励与引导批注"],
+        summary: "以中学生网络受骗亲身经历为切入点，完成信息真伪性解剖与清朗网络宣言，展现学生从‘被动盲从’到‘主动思辨’的素养跃迁。"
+      },
+      {
+        id: "06_dataset",
+        fileName: "06_附件佐证材料/多源信息真伪交叉核验分析表(课堂配套脱敏数据).csv",
+        title: "课堂配套探究数据集：多源信息真伪交叉比对分析表",
+        category: "佐证材料",
+        fileType: "csv",
+        hasPdf: false,
+        badge: "脱敏数据",
+        wordCount: "12组对照",
+        highlights: ["气象/涉农/反诈/科技真实情境", "信源权威度量化数值", "语意煽动系数与交叉印证数", "可直接导入Excel或Python分析"],
+        summary: "提供高一课堂学生进行多源信息交叉比对的12组结构化脱敏数据，供评委专家检验课堂数字化探究活动的科学性与严谨度。"
+      },
+      {
+        id: "readme",
+        fileName: "README_使用说明与安徽省精品课申报注意事项.txt",
+        title: "申报材料包解压使用指南与明晚上报时间节点提醒",
+        category: "视频与规范",
+        fileType: "txt",
+        hasPdf: false,
+        badge: "上报指南",
+        wordCount: "约 1,800 字",
+        highlights: ["安徽省教育厅平台上传指引", "材料格式转换与盖章PDF建议", "刘老师上报加急检查点"],
+        summary: "针对安徽省2026年基础教育精品课上报截止时间的急迫要求，提供一键解压后的材料核对清单、平台上传分栏建议及防超时指南。"
+      }
+    ];
+
+    let currentCategory = "全部";
+
+    // 3. 文档生成逻辑 (均已严格适配刘家阳名师与规范表格)
+    function getDocumentData(id, c) {
+      if (id === "00_checklist") {
+        return {
+          title: `安徽省${c.year}年基础教育精品课申报自检清单与评审要点对照表`,
+          plainText: `安徽省${c.year}年基础教育精品课申报自检清单与评审要点对照表\n报送学校：${c.schoolName} | 申报学科：${c.subject} | 授课教师：${c.teacherName}\n课题：高一必修1《1.3 信息及其特征》\n\n一、评审指标对照\n1. 教学设计（25分）：具备显性【教学评一致性矩阵】，学情与重难点突出。\n2. 学习任务单（20分）：支架式探究任务，配备时效性衰减模型与三维防谣甄别表。\n3. 课件讲稿（15分）：16:9学术蓝调母版，字号高对比度，无水印广告，教师逐字稿音画精准对齐。\n4. 微课视频（30分）：8-15分钟时长红线控制，规范蓝底5秒片头，1080P/48kHz声画质感一流。\n5. 作业与佐证（10分）：分层练习设计，配齐3份真实学生手写批阅样卷与配套脱敏分析数据集。`,
+          html: `<div style="font-family:'PingFang SC','Microsoft YaHei',SimSun,sans-serif; line-height:1.8; color:#1e293b; padding:10px;">
+            <div style="text-align:center; border-bottom:2px solid #1e40af; padding-bottom:12px; margin-bottom:16px;">
+              <h2 style="font-size:20px; font-weight:bold; color:#0f2b5c; margin:0 0 4px 0;">安徽省${c.year}年基础教育精品课申报自检清单与评审要点对照表</h2>
+              <p style="color:#64748b; font-size:13px; margin:0;">报送学校：<strong>${c.schoolName}</strong> | 授课教师：<strong>${c.teacherName}</strong> | 课题：1.3 信息及其特征</p>
+            </div>
+            <h3 style="font-size:15px; font-weight:bold; color:#1e40af; border-left:4px solid #2563eb; padding-left:8px; margin:14px 0 8px 0;">一、评审五大核心指标与分值分解</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:12.5px; border:1px solid #cbd5e1;">
+              <thead>
+                <tr style="background:#f1f5f9;"><th style="border:1px solid #cbd5e1; padding:6px 8px; width:16%;">项目</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:10%;">分值</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:44%;">省一等奖达标要点</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:30%;">耿棚中学特色举措</th></tr>
+              </thead>
+              <tbody>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">教学设计</td><td style="border:1px solid #cbd5e1; padding:6px 8px; color:#2563eb; font-weight:bold; text-align:center;">25分</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">具备严密的【教学评一致性矩阵】，学情与重难点突出，学科核心素养具象化。</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">构建任务驱动四步递进链，将抽象概念具象化。</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">学习任务单</td><td style="border:1px solid #cbd5e1; padding:6px 8px; color:#2563eb; font-weight:bold; text-align:center;">20分</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">支架式探究任务，配备时效性衰减模型与三维防谣甄别表，附带表现性量规。</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">含彩票折线模型、极寒谣言解剖矩阵及三维量规。</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">课件讲稿</td><td style="border:1px solid #cbd5e1; padding:6px 8px; color:#2563eb; font-weight:bold; text-align:center;">15分</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">16:9学术蓝调母版，字号高对比度，无水印广告，教师逐字稿音画精准对齐。</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">刘家阳老师逐字对齐稿，杜绝音画不同步。</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">微课视频</td><td style="border:1px solid #cbd5e1; padding:6px 8px; color:#2563eb; font-weight:bold; text-align:center;">30分</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">8-15分钟时长红线控制，规范蓝底5秒片头，1080P/48kHz声画质感一流。</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">精确规划11分45秒，画中画特写与课件切换流畅。</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">作业与佐证</td><td style="border:1px solid #cbd5e1; padding:6px 8px; color:#2563eb; font-weight:bold; text-align:center;">10分</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">分层练习设计，配齐3份真实学生手写批阅样卷与配套脱敏分析数据集。</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">含大数据杀熟辨析、谣言微报告及真实批改样卷。</td></tr>
+              </tbody>
+            </table>
+          </div>`
+        };
+      }
+
+      if (id === "01_lesson_plan") {
+        return {
+          title: `教学设计：普通高中信息技术《1.3 信息及其特征》(含教学评一致性矩阵与课标素养推导)`,
+          plainText: `《普通高中信息技术·必修1 数据与计算》教学设计\n课题：1.3 信息及其特征\n授课单位：${c.schoolName}\n执教教师：${c.teacherName}（中学高级教师，教龄20余年）\n课时安排：${c.lessonTime}\n授课年级：${c.grade}\n教材版本：${c.textbook}\n\n一、课标四大学科核心素养三维推导：信息意识、计算思维、数字化学习与创新、信息社会责任。\n二、教学评一致性矩阵表：包含核心素养、学习目标、评估任务与学习活动对应关系。\n三、学情深度剖析与重难点突破策略。\n四、任务驱动·四步递进教学流程：创设情境数据向信息跃迁、核心剖析七大特征深度研读、数字化平台探究问诊解剖建构、素养升华信息社会责任。\n五、板书设计与教学反思。`,
+          html: `<div style="font-family:'PingFang SC','Microsoft YaHei',SimSun,sans-serif; line-height:1.8; color:#1e293b; padding:10px;">
+            <div style="text-align:center; border-bottom:2px solid #1e40af; padding-bottom:12px; margin-bottom:16px;">
+              <h2 style="font-size:20px; font-weight:bold; color:#0f2b5c; margin:0 0 4px 0;">《普通高中教科书·信息技术》教学设计</h2>
+              <h3 style="font-size:16px; font-weight:bold; color:#1e40af; margin:0 0 8px 0;">课题：1.3 信息及其特征</h3>
+              <p style="color:#64748b; font-size:13px; margin:0;">执教教师：<strong>${c.teacherName}</strong> | 报送单位：<strong>${c.schoolName}</strong> | 课时：${c.lessonTime}</p>
+            </div>
+            <div style="background:#f8fafc; border-left:4px solid #2563eb; padding:8px 12px; margin-bottom:14px; font-size:13px;">
+              <strong>【课标核心素养四维锚定】</strong>：信息意识（敏锐洞察与溯源）、计算思维（三维核验模型）、数字化学习与创新（支架式协同）、信息社会责任（网络清朗担当）。
+            </div>
+            <h4 style="font-weight:bold; color:#1e40af; font-size:14px; margin:14px 0 8px 0;">教学评一致性矩阵 (Alignment Matrix)</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:12.5px; border:1px solid #cbd5e1;">
+              <thead>
+                <tr style="background:#f1f5f9;"><th style="border:1px solid #cbd5e1; padding:6px 8px; width:16%;">素养维度</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:30%;">学习目标 (可观测指标)</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:26%;">评估证据与任务</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:28%;">教学活动组织</th></tr>
+              </thead>
+              <tbody>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">信息意识<br/>计算思维</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">区分数据与信息，理解赋意飞跃机制</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">任务单活动0填空达标率≥90%</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">耿棚气象站传感器数值流转化探究</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">信息意识<br/>数字化创新</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">掌握七大特征，绘制时效性衰减折线</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">任务一折线图与价值分析</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">兰德军情与过期彩票生活矛盾思辨</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">计算思维<br/>信息社会责任</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">构建三维真伪核验模型并实战应用</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">任务二三维谣言解剖表A级达标</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">针对百年极寒假警报开展多源交叉查证</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">信息社会责任</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">恪守网络道德，树立清朗担当</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">任务三小组宣言优秀评价</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">反思网络谣言对农村农业经济危害</td></tr>
+              </tbody>
+            </table>
+          </div>`
+        };
+      }
+
+      if (id === "02_task_sheet") {
+        return {
+          title: `学习任务单：普通高中信息技术《1.3 信息及其特征》(支架式探究与表现性量规)`,
+          plainText: `普通高中教科书·信息技术 必修1《数据与计算》\n学生自主探究学习任务单：1.3 信息及其特征\n学校：${c.schoolName} | 班级：高一(____)班 | 姓名：__________ | 学号：______\n指导教师：${c.teacherName}\n\n【活动0：初试锋芒·从数据向信息跨越】\n【任务一：问诊·春晚中奖与彩票热议】（时效性折线衰减模型与价值相对性分析）\n【任务二：解剖·气象预警权威发布 vs 百年极寒网络谣言】（三维鉴别支架表：信源资质核验、语意客观审视、多源交叉印证）\n【任务三：建构·信息特征图谱与小组清朗宣言】\n【表现性评价量规】：自评、互评、师评规范三维表格。`,
+          html: `<div style="font-family:'PingFang SC','Microsoft YaHei',SimSun,sans-serif; line-height:1.8; color:#1e293b; padding:10px;">
+            <div style="text-align:center; border-bottom:2px dashed #94a3b8; padding-bottom:12px; margin-bottom:16px;">
+              <h2 style="font-size:18px; font-weight:bold; color:#0f2b5c; margin:0 0 4px 0;">高一信息技术必修1《数据与计算》学生自主探究任务单</h2>
+              <p style="color:#64748b; font-size:13px; margin:0;">学校：<strong>${c.schoolName}</strong> | 班级：高一(____)班 | 姓名：__________ | 指导教师：<strong>${c.teacherName}</strong></p>
+            </div>
+            <h4 style="font-weight:bold; color:#1e40af; font-size:14px; margin:12px 0 6px 0;">任务二：解剖·三维甄别支架模型（信源-语意-多源交叉）</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:12.5px; border:1px solid #cbd5e1;">
+              <thead>
+                <tr style="background:#f1f5f9;"><th style="border:1px solid #cbd5e1; padding:6px 8px; width:20%;">甄别审视维度</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:40%;">网络自媒体惊悚热帖（某短视频）</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:40%;">安徽省气象局官方服务平台公告</th></tr>
+              </thead>
+              <tbody>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">1. 信源权威度</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">个人注册‘乡村杂谈客’，无资质</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">安徽省气象局官方蓝V认证，法定职责</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">2. 语意客观性</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">使用‘绝对冻死’、‘抢粮’等煽动词</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">客观给出降温4-6℃概率与农事建议</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold;">3. 多源交叉印证</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">全国检索查无此警报，印证源为0</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">国家综合气象观测网、各市台联合印证</td></tr>
+              </tbody>
+            </table>
+          </div>`
+        };
+      }
+
+      if (id === "03_ppt_script") {
+        return {
+          title: `教学课件PPT逐页讲稿与视觉大纲_《1.3 信息及其特征》`,
+          plainText: `教学课件PPT视觉设计大纲与教师逐字讲稿对齐表\n课题：1.3 信息及其特征 | 执教教师：${c.teacherName} | 学校：${c.schoolName}\n母版规格：16:9纯学术深蓝底色，高对比度字体，无商业广告水印。\n全套16张幻灯片音画对齐大纲，包含刘家阳老师授课逐字稿。`,
+          html: `<div style="font-family:'PingFang SC','Microsoft YaHei',SimSun,sans-serif; line-height:1.8; color:#1e293b; padding:10px;">
+            <div style="text-align:center; border-bottom:2px solid #1e40af; padding-bottom:12px; margin-bottom:16px;">
+              <h2 style="font-size:18px; font-weight:bold; color:#0f2b5c; margin:0 0 4px 0;">课件16页视觉排版指引与教师逐字讲稿对齐表</h2>
+              <p style="color:#64748b; font-size:13px; margin:0;">执教教师：<strong>${c.teacherName}</strong> | 报送单位：<strong>${c.schoolName}</strong> | 规格：16:9无水印</p>
+            </div>
+            <table style="width:100%; border-collapse:collapse; font-size:12.5px; border:1px solid #cbd5e1;">
+              <thead>
+                <tr style="background:#f1f5f9;"><th style="border:1px solid #cbd5e1; padding:6px 8px; width:12%; text-align:center;">页码</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:40%;">视觉排版指引 (16:9)</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:48%;">刘家阳老师同步逐字讲稿</th></tr>
+              </thead>
+              <tbody>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold; text-align:center;">P01</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">深蓝渐变底纹(#0F2B5C)，标题白色40pt居中，右下角标明执教教师：刘家阳。</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">“各位评委老师、同学们好！我是耿棚中学的刘家阳老师。今天我们共同探究高一核心篇章《信息及其特征》……”</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold; text-align:center;">P02</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">对比耿棚气象站连续传感器数值流与日常生活天气指南图。</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">“左边这串数字在未经处理前只是冰冷的数据；赋予现实语境后，它变成了指导生活的有效信息。”</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold; text-align:center;">P03-P09</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">三大素养目标卡片，逐页深入研读七大特征（兰德军情、彩票衰减、萧伯纳苹果）。</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">重点阐明兰德军情战前战后的价值反差，推导出价值相对性核心法则。</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; font-weight:bold; text-align:center;">P10-P16</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">三维鉴别支架模型实战，网络法治素养升华，知识导图回顾，全班起立宣言。</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">“用理性的双眼看清数字世界，用科技的智慧守护家乡净土！感谢各位评委专家，下课！”</td></tr>
+              </tbody>
+            </table>
+          </div>`
+        };
+      }
+
+      if (id === "04_homework") {
+        return {
+          title: `课后作业练习与学业质量评价指南_《1.3 信息及其特征》`,
+          plainText: `高中信息技术必修1《数据与计算》课后分层作业与评价指南\n课题：1.3 信息及其特征 | 设计教师：${c.teacherName}\n\n【模块一：基础诊断作业（A层·5道精选选择题）】\n【模块二：情境辨析作业（B层·能力迁移，小麦抢收案例）】\n【模块三：实践拓展作业（C层·微报告撰写，配齐学业质量评价量规）】`,
+          html: `<div style="font-family:'PingFang SC','Microsoft YaHei',SimSun,sans-serif; line-height:1.8; color:#1e293b; padding:10px;">
+            <div style="text-align:center; border-bottom:2px solid #1e40af; padding-bottom:12px; margin-bottom:16px;">
+              <h2 style="font-size:18px; font-weight:bold; color:#0f2b5c; margin:0 0 4px 0;">高中信息技术《1.3 信息及其特征》分层作业与评价指南</h2>
+              <p style="color:#64748b; font-size:13px; margin:0;">设计教师：<strong>${c.teacherName}</strong> | 报送学校：<strong>${c.schoolName}</strong></p>
+            </div>
+            <h4 style="font-weight:bold; color:#1e40af; font-size:14px; margin:12px 0 6px 0;">基础诊断题错因诊断与学业素养归因表格</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:12.5px; border:1px solid #cbd5e1;">
+              <thead>
+                <tr style="background:#f1f5f9;"><th style="border:1px solid #cbd5e1; padding:6px 8px; width:10%; text-align:center;">题号</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:20%;">考查特征</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:12%; text-align:center;">答案</th><th style="border:1px solid #cbd5e1; padding:6px 8px; width:58%;">典型错因诊断与学科素养评价</th></tr>
+              </thead>
+              <tbody>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; text-align:center; font-weight:bold;">第1题</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">载体依附性</td><td style="border:1px solid #cbd5e1; padding:6px 8px; text-align:center; color:#16a34a; font-weight:bold;">B</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">笛声是声波物质载体，未能分清载体与信息本身易误选A。</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; text-align:center; font-weight:bold;">第2题</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">共享性与价值性</td><td style="border:1px solid #cbd5e1; padding:6px 8px; text-align:center; color:#16a34a; font-weight:bold;">C</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">农资手册传阅不损耗对应共享性，指导增产对应价值性。</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; text-align:center; font-weight:bold;">第3题</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">时效性心理利用</td><td style="border:1px solid #cbd5e1; padding:6px 8px; text-align:center; color:#16a34a; font-weight:bold;">B</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">诈骗分子利用逾期作废的时效性紧迫感促成冲动操作。</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; text-align:center; font-weight:bold;">第4题</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">价值相对性</td><td style="border:1px solid #cbd5e1; padding:6px 8px; text-align:center; color:#16a34a; font-weight:bold;">A</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">大数据杀熟本质是利用掌握用户敏感度信息的不对称实现差异化。</td></tr>
+                <tr><td style="border:1px solid #cbd5e1; padding:6px 8px; text-align:center; font-weight:bold;">第5题</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">真伪性与决策偏差</td><td style="border:1px solid #cbd5e1; padding:6px 8px; text-align:center; color:#16a34a; font-weight:bold;">B</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">假情报反间计致使曹操斩杀蔡瑁，反映假信息的致命误导。</td></tr>
+              </tbody>
+            </table>
+          </div>`
+        };
+      }
+
+      if (id === "05_video_script") {
+        return {
+          title: `微课视频录制脚本与5秒规范片头制作说明`,
+          plainText: `微课视频录制脚本与5秒片头国家级技术规范\n课题：1.3 信息及其特征 | 执教教师：${c.teacherName} | 学校：${c.schoolName}\n\n1. 视频硬指标：时长8-15分钟（建议11分45秒），1920x1080P/25fps/H.264，双声道48kHz立体声无杂音。\n2. 5秒标准片头文字（蓝底白字居中静止显示5.0秒）：\n   第一行：普通高中教科书·信息技术 必修1《数据与计算》\n   第二行：第1章 数据与信息 · 1.3 信息及其特征\n   第三行：执教教师：${c.teacherName}\n   第四行：工作单位：${c.schoolName}`,
+          html: `<div style="font-family:'PingFang SC','Microsoft YaHei',SimSun,sans-serif; line-height:1.8; color:#1e293b; padding:10px;">
+            <div style="text-align:center; border-bottom:2px solid #1e40af; padding-bottom:12px; margin-bottom:16px;">
+              <h2 style="font-size:18px; font-weight:bold; color:#0f2b5c;">微课录制标准与5秒规范片头制作指南</h2>
+            </div>
+            <div style="background:#1e3a8a; color:#fff; border-radius:6px; padding:16px; text-align:center; margin:12px 0;">
+              <p style="font-size:13px; color:#93c5fd; margin:0 0 6px 0;">【标准5秒片头样式】</p>
+              <p style="font-size:15px; margin:0 0 4px 0;">普通高中教科书·信息技术 必修1《数据与计算》</p>
+              <h3 style="font-size:22px; font-weight:bold; color:#fde047; margin:0 0 8px 0;">1.3 信息及其特征</h3>
+              <p style="font-size:14px; margin:0 0 2px 0;">执教教师：${c.teacherName}</p>
+              <p style="font-size:14px; margin:0;">工作单位：${c.schoolName}</p>
+            </div>
+          </div>`
+        };
+      }
+
+      if (id.startsWith("06_sample")) {
+        const sampleIdx = id.replace("06_sample", "");
+        const names = { "1": "李*涵（98分）", "2": "张*宇（95分）", "3": "王*博（92分）" };
+        const sName = names[sampleIdx] || "优秀学生";
+        return {
+          title: `真实课堂学生任务单生成样卷_优秀样卷${sampleIdx}`,
+          plainText: `普通高中教科书·信息技术 必修1《数据与计算》\n真实课堂学生任务单生成样卷（优秀样卷0${sampleIdx}：${sName}）\n学校：${c.schoolName} | 指导教师：${c.teacherName}\n\n包含学生手写答卷完整笔迹模拟、折线图分析、三维核验作答，以及刘家阳老师带有针对性激励与学科素养评价的红色手写批改评语，有力佐证课堂探究实效。`,
+          html: `<div style="font-family:'PingFang SC','Microsoft YaHei',SimSun,sans-serif; line-height:1.8; color:#1e293b; padding:10px;">
+            <div style="text-align:center; border-bottom:2px dashed #94a3b8; padding-bottom:12px; margin-bottom:14px;">
+              <h2 style="font-size:18px; font-weight:bold; color:#0f2b5c;">学生课堂探究实证样卷（${sName}）</h2>
+              <p style="color:#64748b; font-size:13px; margin:0;">学校：<strong>${c.schoolName}</strong> | 执教批阅：<strong>${c.teacherName}</strong></p>
+            </div>
+            <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; padding:12px; font-size:13px;">
+              <p style="color:#1e3a8a; margin:0 0 6px 0;"><strong>【学生作答采撷】</strong>：深入剖析信息时效性衰减特征，运用信源、语意与多源交叉模型准确识破网络谣言。</p>
+              <p style="color:#dc2626; font-family:serif; margin:0; border-top:1px dashed #fca5a5; padding-top:6px;">
+                ✎ 教师红笔批阅：分析深刻透彻，能将课堂所学计算思维模型用于指导现实生活，具备优秀的学科素养！（${c.teacherName}老师批）
+              </p>
+            </div>
+          </div>`
+        };
+      }
+
+      if (id === "06_dataset") {
+        return {
+          title: `多源信息真伪交叉核验分析表(课堂配套脱敏数据)`,
+          plainText: `信息ID,信息主题,原始发布平台,发布账号名称,信源权威资质评级(1-5),语意煽动系数(1-10),印证主流信源数,时效窗口类型,特征归属标签,核验最终结论,教学指导建议\nINFO_001,皖北遭遇百年一遇极寒暴雪蔬菜暴涨,某自媒体短视频,乡村奇闻杂谈,1,9,0,突发短效,真伪性_不完全性,虚假网络谣言,引导学生识别恐慌营销与无资质信源\nINFO_002,强对流寒潮局地降温4-6度防御指南,安徽省气象局官网,安徽气象服务平台,5,1,18,确定周期,价值性_时效性,官方权威真实,用于建立正向信源标杆数据\nINFO_003,高考报名缴费可加20分内部特权渠道,微信外链分享,高考招生快车道,1,10,0,限时紧迫,真伪性_价值相对性,电信诈骗诱导,警示学生网络诈骗法律红线\nINFO_004,颍上县小麦赤霉病春季综合防治方案,颍上县农业农村局,颍上三农在线,5,2,8,农时季节,价值性_共享性,官方农业指导,契合乡村农业学情真实案例\nINFO_005,某品牌满减代金券3日24点失效说明,本地商场服务号,耿棚便民商贸,4,3,2,严格时限,时效性_载体依附性,商业有效信息,用于绘制时效性衰减折线模型\nINFO_006,转发生日祝福可免费领取腾讯股票,QQ空间转发链,官方福利君666,1,8,0,虚假病毒,真伪性_载体依附性,恶意裂变营销,分析网络虚假链式传播机制\nINFO_007,全省高中信息技术优质课评审指标,安徽省教育厅基教处,安徽教育网,5,1,12,长期规范,共享性_价值性,官方行政规程,用于树立精品课标准规范意识\nINFO_008,吃菠菜加豆腐会当场引发肾结石,健康养生短视频,民间神医张大叔,1,7,0,谣言长效,真伪性_不完全性,伪科学谣言,引导利用权威医学库交叉比对\nINFO_009,高德/百度地图耿棚镇淮河大桥施工绕行,数字地图交通播报,交通综合调度中心,5,2,6,动态小时,时效性_载体依附性,实时有效信息,理解信息载体与时效性结合\nINFO_010,转发此锦鲤全家三年不生病,朋友圈图文卡片,好运莲莲,1,6,0,迷信谣言,真伪性_价值相对性,精神慰藉假象,开展理性科学素养引导\nINFO_011,2026年中央一号文件惠农政策全文,新华社官方客户端,新华社官方融媒,5,1,35,长效指引,共享性_价值性,国家权威公文,体会信息价值对国家社会的宏观意义\nINFO_012,喝白酒能有效杀灭新型流感病毒,家族聊天群语音,热心邻居李大娘,1,8,0,虚假短效,真伪性_不完全性,群体误导谣言,培养对长辈进行温和科普的沟通能力`,
+          html: `<div style="font-family:'PingFang SC','Microsoft YaHei',SimSun,sans-serif; line-height:1.8; color:#1e293b; padding:10px;">
+            <div style="text-align:center; border-bottom:2px solid #1e40af; padding-bottom:12px; margin-bottom:16px;">
+              <h2 style="font-size:18px; font-weight:bold; color:#0f2b5c;">多源信息真伪交叉核验分析表（课堂脱敏数据）</h2>
+            </div>
+            <p style="font-size:13px; color:#475569;">包含12组情境数据（气象、农业、反诈、科普），配有信源星级、语意煽动系数与交叉印证数，已打包在 CSV 文件中。</p>
+          </div>`
+        };
+      }
+
+      return {
+        title: `使用说明与安徽省精品课申报注意事项`,
+        plainText: `安徽省${c.year}年基础教育精品课申报全套材料成果包\n教师：${c.teacherName} | 学校：${c.schoolName}\n\n1. 包含教学设计、学习任务单、课件逐字讲稿、分层作业、微课录制规范、3份学生样卷与脱敏数据集。\n2. 已为您同步提供规范排版的 DOCX 与 PDF 两种格式，方便直接上传。`,
+        html: `<div style="font-family:'PingFang SC','Microsoft YaHei',SimSun,sans-serif; line-height:1.8; color:#1e293b; padding:10px;">
+          <h2 style="font-size:18px; font-weight:bold; color:#0f2b5c;">申报成果包使用说明</h2>
+          <p style="font-size:13px; color:#475569; margin-top:8px;">全套材料已就绪，已包含规范排版的 DOCX 与 PDF 双格式，可一键打包或逐一单独下载。</p>
+        </div>`
+      };
+    }
+
+    // 4. 标准 OpenXML .docx 构建核心（真实表格转换，彻底解决排版格式问题）
+    function escapeXml(unsafe) {
+      if (!unsafe) return "";
+      return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+    }
+
+    function convertHtmlToOpenXml(htmlContent, plainFallback) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlContent, "text/html");
+      const body = doc.body;
+      const xmlParts = [];
+
+      function processNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent.trim();
+          if (text) {
+            xmlParts.push(`
+              <w:p>
+                <w:r>
+                  <w:rPr>
+                    <w:rFonts w:ascii="SimSun" w:eastAsia="SimSun" w:hAnsi="SimSun"/>
+                    <w:sz w:val="24"/>
+                    <w:color w:val="1E293B"/>
+                  </w:rPr>
+                  <w:t xml:space="preserve">${escapeXml(text)}</w:t>
+                </w:r>
+              </w:p>
+            `);
+          }
+          return;
+        }
+
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+        const el = node;
+        const tagName = el.tagName.toLowerCase();
+
+        if (tagName === "h1" || tagName === "h2") {
+          const sz = tagName === "h1" ? "34" : "28";
+          const color = tagName === "h1" ? "0F2B5C" : "1E40AF";
+          xmlParts.push(`
+            <w:p>
+              <w:pPr><w:jc w:val="center"/><w:spacing w:before="240" w:after="140"/></w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:rFonts w:ascii="SimHei" w:eastAsia="SimHei" w:hAnsi="SimHei"/>
+                  <w:b/>
+                  <w:sz w:val="${sz}"/>
+                  <w:color w:val="${color}"/>
+                </w:rPr>
+                <w:t>${escapeXml(el.textContent)}</w:t>
+              </w:r>
+            </w:p>
+          `);
+          return;
+        }
+
+        if (tagName === "h3" || tagName === "h4") {
+          xmlParts.push(`
+            <w:p>
+              <w:pPr><w:spacing w:before="180" w:after="80"/></w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:rFonts w:ascii="SimHei" w:eastAsia="SimHei" w:hAnsi="SimHei"/>
+                  <w:b/>
+                  <w:sz w:val="26"/>
+                  <w:color w:val="1E40AF"/>
+                </w:rPr>
+                <w:t>${escapeXml(el.textContent)}</w:t>
+              </w:r>
+            </w:p>
+          `);
+          return;
+        }
+
+        // 核心修复表格：构建真实的 <w:tbl> 单元格结构，彻底解决一格排版问题
+        if (tagName === "table") {
+          const rows = Array.from(el.querySelectorAll("tr"));
+          const tableXmlRows = [];
+
+          rows.forEach((tr, rowIndex) => {
+            const cells = Array.from(tr.querySelectorAll("th, td"));
+            const cellXmlList = [];
+
+            cells.forEach(cell => {
+              const isTh = cell.tagName.toLowerCase() === "th" || rowIndex === 0;
+              const cellText = cell.textContent.trim();
+              const isRed = cellText.includes("教师红笔") || cellText.includes("批阅") || cellText.includes("✎");
+
+              cellXmlList.push(`
+                <w:tc>
+                  <w:tcPr>
+                    <w:tcW w:w="0" w:type="auto"/>
+                    <w:shd w:val="clear" w:color="auto" w:fill="${isTh ? 'F1F5F9' : isRed ? 'FEF2F2' : 'FFFFFF'}"/>
+                    <w:tcMar>
+                      <w:top w:w="120" w:type="dxa"/>
+                      <w:left w:w="140" w:type="dxa"/>
+                      <w:bottom w:w="120" w:type="dxa"/>
+                      <w:right w:w="140" w:type="dxa"/>
+                    </w:tcMar>
+                    <w:vAlign w:val="center"/>
+                  </w:tcPr>
+                  <w:p>
+                    <w:pPr>
+                      <w:spacing w:line="320" w:lineRule="auto" w:after="0" w:before="0"/>
+                      ${isTh ? '<w:jc w:val="center"/>' : ''}
+                    </w:pPr>
+                    <w:r>
+                      <w:rPr>
+                        <w:rFonts w:ascii="${isTh ? 'SimHei' : isRed ? 'KaiTi' : 'SimSun'}" w:eastAsia="${isTh ? 'SimHei' : isRed ? 'KaiTi' : 'SimSun'}" w:hAnsi="${isTh ? 'SimHei' : isRed ? 'KaiTi' : 'SimSun'}"/>
+                        ${isTh || isRed ? '<w:b/>' : ''}
+                        <w:sz w:val="22"/>
+                        <w:color w:val="${isRed ? 'DC2626' : isTh ? '0F2B5C' : '1E293B'}"/>
+                      </w:rPr>
+                      <w:t xml:space="preserve">${escapeXml(cellText)}</w:t>
+                    </w:r>
+                  </w:p>
+                </w:tc>
+              `);
+            });
+
+            tableXmlRows.push(`
+              <w:tr>
+                <w:trPr>
+                  ${rowIndex === 0 ? '<w:tblHeader/>' : ''}
+                  <w:cantSplit/>
+                </w:trPr>
+                ${cellXmlList.join("\n")}
+              </w:tr>
+            `);
+          });
+
+          xmlParts.push(`
+            <w:tbl>
+              <w:tblPr>
+                <w:tblW w:w="5000" w:type="pct"/>
+                <w:tblBorders>
+                  <w:top w:val="single" w:sz="6" w:space="0" w:color="CBD5E1"/>
+                  <w:left w:val="single" w:sz="6" w:space="0" w:color="CBD5E1"/>
+                  <w:bottom w:val="single" w:sz="6" w:space="0" w:color="CBD5E1"/>
+                  <w:right w:val="single" w:sz="6" w:space="0" w:color="CBD5E1"/>
+                  <w:insideH w:val="single" w:sz="4" w:space="0" w:color="E2E8F0"/>
+                  <w:insideV w:val="single" w:sz="4" w:space="0" w:color="E2E8F0"/>
+                </w:tblBorders>
+                <w:tblCellMar>
+                  <w:top w:w="120" w:type="dxa"/>
+                  <w:left w:w="140" w:type="dxa"/>
+                  <w:bottom w:w="120" w:type="dxa"/>
+                  <w:right w:w="140" w:type="dxa"/>
+                </w:tblCellMar>
+              </w:tblPr>
+              ${tableXmlRows.join("\n")}
+            </w:tbl>
+            <w:p><w:pPr><w:spacing w:after="100"/></w:pPr></w:p>
+          `);
+          return;
+        }
+
+        const text = el.textContent.trim();
+        if (text.includes("教师红笔") || text.includes("✎ 教师") || text.includes("★【教师")) {
+          xmlParts.push(`
+            <w:p>
+              <w:pPr>
+                <w:ind w:left="360" w:right="360"/>
+                <w:spacing w:before="100" w:after="100"/>
+                <w:shd w:val="clear" w:color="auto" w:fill="FEF2F2"/>
+              </w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:rFonts w:ascii="KaiTi" w:eastAsia="KaiTi" w:hAnsi="KaiTi"/>
+                  <w:b/>
+                  <w:sz w:val="23"/>
+                  <w:color w:val="DC2626"/>
+                </w:rPr>
+                <w:t xml:space="preserve">${escapeXml(text)}</w:t>
+              </w:r>
+            </w:p>
+          `);
+          return;
+        }
+
+        if (tagName === "p") {
+          const isSubtitle = text.includes("授课单位：") || text.includes("执教教师：") || text.includes("报送学校：");
+          xmlParts.push(`
+            <w:p>
+              <w:pPr>
+                ${isSubtitle ? '<w:jc w:val="center"/>' : '<w:ind w:firstLine="480"/>'}
+                <w:spacing w:line="360" w:lineRule="auto" w:after="100"/>
+              </w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:rFonts w:ascii="${isSubtitle ? 'KaiTi' : 'SimSun'}" w:eastAsia="${isSubtitle ? 'KaiTi' : 'SimSun'}" w:hAnsi="${isSubtitle ? 'KaiTi' : 'SimSun'}"/>
+                  <w:sz w:val="${isSubtitle ? '22' : '24'}"/>
+                  <w:color w:val="${isSubtitle ? '475569' : '1E293B'}"/>
+                </w:rPr>
+                <w:t xml:space="preserve">${escapeXml(text)}</w:t>
+              </w:r>
+            </w:p>
+          `);
+          return;
+        }
+
+        Array.from(el.childNodes).forEach(processNode);
+      }
+
+      Array.from(body.childNodes).forEach(processNode);
+
+      if (xmlParts.length === 0) {
+        return plainFallback.split("\n").map(l => `<w:p><w:r><w:t xml:space="preserve">${escapeXml(l)}</w:t></w:r></w:p>`).join("\n");
+      }
+
+      return xmlParts.join("\n");
+    }
+
+    async function buildDocxBlob(title, htmlContent, plainText) {
+      const zip = new JSZip();
+
+      zip.file("[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+  <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
+</Types>`);
+
+      zip.folder("_rels").file(".rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`);
+
+      zip.folder("word").folder("_rels").file("document.xml.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
+</Relationships>`);
+
+      zip.folder("word").file("styles.xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:docDefaults>
+    <w:rPrDefault>
+      <w:rPr>
+        <w:rFonts w:ascii="SimSun" w:eastAsia="SimSun" w:hAnsi="SimSun" w:cs="SimSun"/>
+        <w:sz w:val="24"/>
+        <w:szCs w:val="24"/>
+        <w:lang w:val="zh-CN"/>
+      </w:rPr>
+    </w:rPrDefault>
+  </w:docDefaults>
+  <w:style w:type="paragraph" w:default="1" w:styleId="Normal">
+    <w:name w:val="Normal"/>
+    <w:pPr><w:spacing w:line="360" w:lineRule="auto" w:after="100"/></w:pPr>
+  </w:style>
+</w:styles>`);
+
+      const bodyXml = convertHtmlToOpenXml(htmlContent, plainText);
+
+      const documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+            xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <w:body>
+    ${bodyXml}
+    <w:sectPr>
+      <w:pgSz w:w="11906" w:h="16838"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/>
+    </w:sectPr>
+  </w:body>
+</w:document>`;
+      zip.folder("word").file("document.xml", documentXml);
+
+      return await zip.generateAsync({
+        type: "blob",
+        mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        compression: "DEFLATE",
+        compressionOptions: { level: 6 }
+      });
+    }
+
+    // 5. 动态生成高清标准 A4 PDF 文件
+    async function buildPdfBlob(title, htmlContent) {
+      const container = document.createElement("div");
+      container.style.position = "fixed";
+      container.style.left = "-9999px";
+      container.style.top = "0";
+      container.style.width = "820px";
+      container.style.padding = "36px 42px";
+      container.style.backgroundColor = "#ffffff";
+      container.style.color = "#1e293b";
+      container.style.fontFamily = "'PingFang SC', 'Microsoft YaHei', SimSun, sans-serif";
+      container.style.boxSizing = "border-box";
+      container.innerHTML = htmlContent;
+
+      document.body.appendChild(container);
+
+      try {
+        const canvas = await html2canvas(container, {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          backgroundColor: "#ffffff"
+        });
+
+        const imgWidth = 595.28;
+        const pageHeight = 841.89;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ orientation: "portrait", unit: "pt", format: "a4" });
+
+        let heightLeft = imgHeight;
+        let position = 0;
+        const imgData = canvas.toDataURL("image/jpeg", 0.96);
+
+        pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft > 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+
+        return pdf.output("blob");
+      } finally {
+        document.body.removeChild(container);
+      }
+    }
+
+    // 6. 渲染界面
+    function renderCategoryTabs() {
+      const cats = ["全部", "核心教学", "教学辅助", "评价与作业", "佐证材料", "视频与规范"];
+      const container = document.getElementById("categoryTabContainer");
+      container.innerHTML = cats.map(cat => `
+        <button onclick="setCategory('${cat}')" class="px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap cursor-pointer ${
+          currentCategory === cat ? 'bg-white text-slate-900 shadow-sm font-semibold' : 'text-slate-600 hover:text-slate-900'
+        }">${cat}</button>
+      `).join("");
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      renderCategoryTabs();
+      renderMaterialsGrid();
+    }
+
+    function renderMaterialsGrid() {
+      const grid = document.getElementById("materialsGrid");
+      const list = currentCategory === "全部" ? materials : materials.filter(m => m.category === currentCategory);
+
+      grid.innerHTML = list.map(item => `
+        <div class="bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between hover:shadow-md hover:border-blue-300 transition-all group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs text-slate-500">
+              <div class="flex items-center gap-1.5">
+                <span class="font-semibold text-blue-700">${item.badge}</span>
+                ${customDocs[item.id] ? '<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-1.5 py-0.5 rounded border border-amber-300">已在线修改</span>' : ''}
+              </div>
+              <div class="flex items-center gap-1 text-slate-400">
+                <span>${item.wordCount}</span>
+                <span aria-hidden="true">·</span>
+                <span class="font-mono text-slate-500">${item.hasPdf ? 'DOCX + PDF' : '.' + item.fileType.toUpperCase()}</span>
+              </div>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 group-hover:text-blue-700 transition-colors line-clamp-2">
+              ${item.title}
+            </h3>
+            <div class="space-y-1.5 pt-1">
+              ${item.highlights.map(h => `
+                <div class="flex items-center gap-1.5 text-xs text-slate-600">
+                  <i class="fa-solid fa-circle-check text-emerald-600 shrink-0"></i>
+                  <span class="truncate">${h}</span>
+                </div>
+              `).join("")}
+            </div>
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed pt-1 border-t border-slate-100">
+              ${item.summary}
+            </p>
+          </div>
+
+          <div class="pt-4 mt-4 border-t border-slate-100 space-y-2">
+            <!-- 操作行 1：深度预览 与 在压缩包中编辑此文件 -->
+            <div class="flex items-center gap-2">
+              <button onclick="openPreview('${item.id}')" class="flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-2 text-xs font-medium text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg transition-colors cursor-pointer">
+                <i class="fa-regular fa-eye text-xs"></i>
+                深度预览
+              </button>
+              <button onclick="openZipWorkbench('${item.id}')" class="flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-2 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors cursor-pointer shadow-2xs" title="在 ZIP 压缩包内部工作台中直接编辑此文档，支持插入教学实操图片">
+                <i class="fa-solid fa-box-archive text-blue-600"></i>
+                在压缩包中编辑 (插图)
+              </button>
+            </div>
+
+            <!-- 操作行 2：下载 Word 与 导出 PDF -->
+            <div class="flex items-center gap-2">
+              <button onclick="downloadSingle('${item.id}')" class="flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-white bg-blue-700 hover:bg-blue-800 rounded-lg transition-colors cursor-pointer shadow-xs">
+                <i class="fa-solid fa-download text-xs"></i>
+                下载 .${item.fileType}
+              </button>
+              ${item.hasPdf ? `
+                <button onclick="downloadSinglePdf('${item.id}')" class="flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-lg transition-colors cursor-pointer">
+                  <i class="fa-solid fa-file-pdf text-rose-600"></i>
+                  导出对应 PDF
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // 在线编辑自定义材料缓存库
+    let customDocs = {};
+    let currentEditingItemId = null;
+
+    // 7. 在线可视化富文本编辑器 (支持插入教学图片与多文件快速切换)
+    function openZipWorkbench(id) {
+      const targetId = id || materials[0]?.id || "01_teaching_design";
+      openEditor(targetId);
+    }
+
+    function switchEditorDoc(newId) {
+      if (!newId || newId === currentEditingItemId) return;
+      saveCurrentEditor(false);
+      openEditor(newId);
+    }
+
+    function openEditor(id) {
+      const item = materials.find(m => m.id === id);
+      if (!item) return;
+      currentEditingItemId = id;
+      const data = customDocs[id] || getDocumentData(id, teacherConfig);
+
+      // 填充下拉文件选择器
+      const selector = document.getElementById("editorZipFileSelect");
+      if (selector) {
+        selector.innerHTML = materials.map(m => `
+          <option value="${m.id}" ${m.id === id ? 'selected' : ''}>
+            ${customDocs[m.id] ? '✨ [已修改] ' : ''}${m.fileName}
+          </option>
+        `).join("");
+      }
+
+      document.getElementById("editorBadge").innerText = `${item.badge} · ${item.category}`;
+      document.getElementById("editorFileName").innerText = `压缩包内路径: /${item.fileName}`;
+      document.getElementById("editorContent").innerHTML = data.html;
+      document.getElementById("editorSaveToast").classList.add("hidden");
+
+      const pdfBtn = document.getElementById("editorPdfBtn");
+      if (item.hasPdf) {
+        pdfBtn.classList.remove("hidden");
+      } else {
+        pdfBtn.classList.add("hidden");
+      }
+
+      document.getElementById("editorModal").classList.remove("hidden");
+    }
+
+    function closeEditorModal() {
+      document.getElementById("editorModal").classList.add("hidden");
+      currentEditingItemId = null;
+    }
+
+    function execEditorCmd(cmd, val = null) {
+      document.execCommand(cmd, false, val);
+      const editor = document.getElementById("editorContent");
+      if (editor) editor.focus();
+    }
+
+    function handleImageFileSelected(e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (loadEvt) => {
+        const base64 = loadEvt.target.result;
+        const imgHtml = `<p style="text-align: center; margin: 16px 0;"><img src="${base64}" alt="教学实操插图" style="max-width: 90%; height: auto; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin: 0 auto; display: inline-block;" /><br><span style="font-size: 12px; color: #64748b; margin-top: 4px; display: inline-block;">【图】教学实操插图（教师在线编辑插入）</span></p><p><br></p>`;
+        
+        const editor = document.getElementById("editorContent");
+        editor.focus();
+        document.execCommand("insertHTML", false, imgHtml);
+      };
+      reader.readAsDataURL(file);
+      e.target.value = "";
+    }
+
+    function insertCustomTable() {
+      const tableHtml = `
+        <table style="width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; text-align: left;">
+          <thead>
+            <tr style="background-color: #f1f5f9; font-weight: bold;">
+              <th style="border: 1px solid #cbd5e1; padding: 8px 12px;">核心素养维度</th>
+              <th style="border: 1px solid #cbd5e1; padding: 8px 12px;">评价探究指标</th>
+              <th style="border: 1px solid #cbd5e1; padding: 8px 12px;">达标表现成果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border: 1px solid #cbd5e1; padding: 8px 12px;">信息意识 (A级)</td>
+              <td style="border: 1px solid #cbd5e1; padding: 8px 12px;">能够从皖北农业实际中辨析真伪</td>
+              <td style="border: 1px solid #cbd5e1; padding: 8px 12px;">撰写辨析微报告（优秀）</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #cbd5e1; padding: 8px 12px;">数字化学习与创新</td>
+              <td style="border: 1px solid #cbd5e1; padding: 8px 12px;">自主建立在线校验查证流程</td>
+              <td style="border: 1px solid #cbd5e1; padding: 8px 12px;">形成防农资诈骗微指南</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><br></p>
+      `;
+      const editor = document.getElementById("editorContent");
+      editor.focus();
+      document.execCommand("insertHTML", false, tableHtml);
+    }
+
+    function insertCalloutBox() {
+      const calloutHtml = `
+        <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0; color: #1e3a8a;">
+          <p style="font-weight: bold; margin-bottom: 4px;">💡 教师特别教学提示 / 专家评审要点：</p>
+          <p style="margin: 0; font-size: 13px;">请在此处键入针对该教学活动的个性化指导策略或省一等奖评审得分点说明。</p>
+        </div>
+        <p><br></p>
+      `;
+      const editor = document.getElementById("editorContent");
+      editor.focus();
+      document.execCommand("insertHTML", false, calloutHtml);
+    }
+
+    function resetEditorToOriginal() {
+      if (!currentEditingItemId) return;
+      if (confirm("确定要放弃对此篇材料的在线修改并恢复系统原始版本吗？")) {
+        delete customDocs[currentEditingItemId];
+        const originalData = getDocumentData(currentEditingItemId, teacherConfig);
+        document.getElementById("editorContent").innerHTML = originalData.html;
+        document.getElementById("editorSaveToast").classList.add("hidden");
+        renderMaterialsGrid();
+      }
+    }
+
+    function saveCurrentEditor(showToast = true) {
+      if (!currentEditingItemId) return;
+      const editor = document.getElementById("editorContent");
+      const item = materials.find(m => m.id === currentEditingItemId);
+      if (!item || !editor) return;
+
+      const newHtml = editor.innerHTML;
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = newHtml;
+      const newPlainText = tempDiv.innerText || tempDiv.textContent || "";
+
+      customDocs[currentEditingItemId] = {
+        title: item.title,
+        html: newHtml,
+        plainText: newPlainText
+      };
+
+      if (showToast) {
+        document.getElementById("editorSaveToast").classList.remove("hidden");
+      }
+      renderMaterialsGrid();
+    }
+
+    async function exportEditorDocx() {
+      saveCurrentEditor(false);
+      if (!currentEditingItemId) return;
+      await downloadSingle(currentEditingItemId);
+    }
+
+    async function exportEditorPdf() {
+      saveCurrentEditor(false);
+      if (!currentEditingItemId) return;
+      await downloadSinglePdf(currentEditingItemId);
+    }
+
+    // 8. 预览与单独下载
+    function openPreview(id) {
+      const item = materials.find(m => m.id === id);
+      if (!item) return;
+      const data = customDocs[id] || getDocumentData(id, teacherConfig);
+
+      document.getElementById("previewModalBadge").innerText = `${item.badge} · ${item.category}`;
+      document.getElementById("previewModalTitle").innerText = item.title;
+      document.getElementById("previewModalFileName").innerText = item.fileName;
+      document.getElementById("previewModalBody").innerHTML = data.html;
+
+      const switchBtn = document.getElementById("previewModalSwitchEditBtn");
+      if (switchBtn) {
+        switchBtn.onclick = () => {
+          closePreviewModal();
+          openEditor(id);
+        };
+      }
+
+      const dlBtn = document.getElementById("previewModalDownloadBtn");
+      dlBtn.onclick = () => downloadSingle(id);
+      dlBtn.querySelector("span").innerText = `下载 .${item.fileType}`;
+
+      const pdfBtn = document.getElementById("previewModalPdfBtn");
+      if (item.hasPdf) {
+        pdfBtn.classList.remove("hidden");
+        pdfBtn.onclick = () => downloadSinglePdf(id);
+      } else {
+        pdfBtn.classList.add("hidden");
+      }
+
+      document.getElementById("previewModal").classList.remove("hidden");
+    }
+
+    function closePreviewModal() {
+      document.getElementById("previewModal").classList.add("hidden");
+    }
+
+    async function downloadSingle(id) {
+      const item = materials.find(m => m.id === id);
+      if (!item) return;
+      const data = customDocs[id] || getDocumentData(id, teacherConfig);
+
+      if (item.fileType === "docx") {
+        const blob = await buildDocxBlob(data.title, data.html, data.plainText);
+        saveAs(blob, item.fileName);
+      } else if (item.fileType === "csv") {
+        const blob = new Blob(["\uFEFF" + data.plainText], { type: "text/csv;charset=utf-8;" });
+        saveAs(blob, item.fileName);
+      } else {
+        const blob = new Blob([data.plainText], { type: "text/plain;charset=utf-8;" });
+        saveAs(blob, item.fileName);
+      }
+    }
+
+    async function downloadSinglePdf(id) {
+      const item = materials.find(m => m.id === id);
+      if (!item) return;
+      const data = customDocs[id] || getDocumentData(id, teacherConfig);
+      const pdfBlob = await buildPdfBlob(data.title, data.html);
+      saveAs(pdfBlob, item.fileName.replace(/\.docx$/, ".pdf"));
+    }
+
+    // 9. 一键全套 ZIP 打包（含 DOCX + PDF 双格式，自动合并最新在线编辑版本）
+    async function triggerExportAll() {
+      const heroBtn = document.getElementById("heroExportBtn");
+      const navBtn = document.getElementById("navExportBtn");
+      const progressBox = document.getElementById("exportProgressBox");
+      const progressBar = document.getElementById("exportProgressBar");
+      const progressText = document.getElementById("exportProgressPercent");
+      const statusText = document.getElementById("exportStatusText");
+      const successAlert = document.getElementById("exportSuccessAlert");
+
+      heroBtn.disabled = true;
+      navBtn.disabled = true;
+      heroBtn.classList.add("opacity-60");
+      navBtn.classList.add("opacity-60");
+
+      progressBox.classList.remove("hidden");
+      successAlert.classList.add("hidden");
+      progressBar.style.width = "4%";
+      progressText.innerText = "4%";
+      statusText.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-blue-600"></i> 正在初始化 ZIP 压缩容器...';
+
+      try {
+        const zip = new JSZip();
+        const rootFolderName = `安徽省${teacherConfig.year}基础教育精品课_耿棚中学_信息技术《1.3信息及其特征》全套申报材料_刘家阳`;
+        const root = zip.folder(rootFolderName) || zip;
+
+        const total = materials.length;
+
+        for (let i = 0; i < total; i++) {
+          const item = materials[i];
+          const percent = Math.round(((i + 1) / total) * 85);
+          progressBar.style.width = `${percent}%`;
+          progressText.innerText = `${percent}%`;
+          
+          const isEdited = !!customDocs[item.id];
+          statusText.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-blue-600"></i> 正在封装【${item.fileName}】${isEdited ? '(采用在线编辑版)' : ''}...`;
+
+          // 核心：若用户在线编辑过，优先打包已编辑保存的版本
+          const data = customDocs[item.id] || getDocumentData(item.id, teacherConfig);
+
+          if (item.fileType === "docx") {
+            const docxBlob = await buildDocxBlob(data.title, data.html, data.plainText);
+            root.file(item.fileName, docxBlob);
+
+            if (item.hasPdf) {
+              statusText.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-blue-600"></i> 正在同步生成对应【${item.fileName.replace(/\.docx$/, ".pdf")}】...`;
+              try {
+                const pdfBlob = await buildPdfBlob(data.title, data.html);
+                root.file(item.fileName.replace(/\.docx$/, ".pdf"), pdfBlob);
+              } catch (e) {
+                console.warn(e);
+              }
+            }
+          } else if (item.fileType === "csv") {
+            root.file(item.fileName, "\uFEFF" + data.plainText);
+          } else {
+            root.file(item.fileName, data.plainText);
+          }
+
+          await new Promise(r => setTimeout(r, 60));
+        }
+
+        progressBar.style.width = "95%";
+        progressText.innerText = "95%";
+        statusText.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-blue-600"></i> 正在执行最高压缩比封装打包...';
+
+        const zipBlob = await zip.generateAsync({
+          type: "blob",
+          compression: "DEFLATE",
+          compressionOptions: { level: 6 }
+        });
+
+        progressBar.style.width = "100%";
+        progressText.innerText = "100%";
+        statusText.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i> 打包完成（含 DOCX+PDF+在线编辑最新图文），正在拉起本地保存！';
+        successAlert.classList.remove("hidden");
+
+        saveAs(zipBlob, `${rootFolderName}.zip`);
+
+        setTimeout(() => {
+          heroBtn.disabled = false;
+          navBtn.disabled = false;
+          heroBtn.classList.remove("opacity-60");
+          navBtn.classList.remove("opacity-60");
+        }, 3000);
+      } catch (err) {
+        console.error("ZIP packaging error:", err);
+        statusText.innerHTML = '<span class="text-rose-600">打包遇到异常，请重试</span>';
+        heroBtn.disabled = false;
+        navBtn.disabled = false;
+        heroBtn.classList.remove("opacity-60");
+        navBtn.classList.remove("opacity-60");
+      }
+    }
+
+    // 9. 教师信息修改模态框
+    function openConfigModal() {
+      document.getElementById("cfgTeacherName").value = teacherConfig.teacherName;
+      document.getElementById("cfgSchoolName").value = teacherConfig.schoolName;
+      document.getElementById("cfgYear").value = teacherConfig.year;
+      document.getElementById("cfgLessonTime").value = teacherConfig.lessonTime;
+      document.getElementById("cfgTextbook").value = teacherConfig.textbook;
+      document.getElementById("configModal").classList.remove("hidden");
+    }
+
+    function closeConfigModal() {
+      document.getElementById("configModal").classList.add("hidden");
+    }
+
+    function handleSaveConfig(e) {
+      e.preventDefault();
+      teacherConfig.teacherName = document.getElementById("cfgTeacherName").value.trim();
+      teacherConfig.schoolName = document.getElementById("cfgSchoolName").value.trim();
+      teacherConfig.year = document.getElementById("cfgYear").value.trim();
+      teacherConfig.lessonTime = document.getElementById("cfgLessonTime").value.trim();
+      teacherConfig.textbook = document.getElementById("cfgTextbook").value.trim();
+
+      document.getElementById("bannerTeacher").innerText = teacherConfig.teacherName;
+      document.getElementById("bannerTeacherInline").innerText = teacherConfig.teacherName;
+      document.getElementById("bannerSchool").innerText = teacherConfig.schoolName;
+      document.getElementById("bannerSchoolDetail").innerText = teacherConfig.schoolName;
+
+      closeConfigModal();
+      renderMaterialsGrid();
+    }
+
+    // 初始化运行
+    renderCategoryTabs();
+    renderMaterialsGrid();
+  </script>
+</body>
+</html>
